@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Response, status
 
-from models.earthquake import EarthquakeData
-from services.earthquake import generate_events
+from app.models.earthquake import EarthquakeData
+from app.services.earthquake import generate_events
 
 router = APIRouter()
 
