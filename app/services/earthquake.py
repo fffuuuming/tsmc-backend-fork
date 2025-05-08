@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 from app.core.redis import get_alert_suppress_time, redis_client
 from app.models.earthquake import EarthquakeAlert, EarthquakeData, EarthquakeEvent
-from app.models.enums import Location, SeverityLevel
+from app.models.enums import Location, SeverityLevel, TriState
 
 # map severity level to their index
 severity_level_dict = {level.value: i for i, level in enumerate(SeverityLevel)}
@@ -67,8 +67,9 @@ def generate_alerts(events: list[EarthquakeEvent]) -> list[EarthquakeAlert]:
                 origin_time=event.origin_time,
                 location=event.location,
                 severity_level=event.severity_level,
-                status="unprocessed",
-                processing_furation=0,  # Add real logic later
+                has_damage=TriState.UNKNOWN,
+                needs_command_center=TriState.UNKNOWN,
+                processing_duration=0,  # Add real logic later
             )
             alerts.append(alert)
             redis_client.set(redis_key, alert.model_dump_json())
