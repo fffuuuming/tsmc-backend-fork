@@ -36,3 +36,8 @@ jobs:
 
       - name: Run linter
         run: uv run ruff check .
+      
+      - name: Run tests
+        run: |
+          cp .env.example .env
+          uv run pytest -v 
