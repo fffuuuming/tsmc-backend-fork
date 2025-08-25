@@ -13,6 +13,14 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=TSMC-NTU-G4_backend&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=TSMC-NTU-G4_backend)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=TSMC-NTU-G4_backend&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=TSMC-NTU-G4_backend)
 
+## Description
+A Python backend service that powers an Earthquake Event Dispatcher system. Its primary role is to accept earthquake signal and generate both structured event and alert entries for affected locations.
+
+Core Functionality:
+- **Ingestion**: Exposes a REST API (POST /api/earthquake) that accepts earthquake signals, including details such as data source, epicenter, origin time, magnitude, depth... and so on.
+- **Processing & Alerts**: Parses the incoming payload to generate location-specific event records and determines whether alerts should be issued based on severity levels.
+- **Retrieval**: Offers a GET /api/earthquake/alerts endpoint that returns the full list of generated alert objects, enabling downstream systems or dashboards to consume and act on them (e.g. damage report).
+- **Monitoring**: Integrates with Prometheus for metrics collection and Grafana dashboards for real-time visualization, enabling continuous monitoring of both event and alert activity, service health, and system performance.
 ## Project setup
 ```bash
 uv sync --frozen --no-cache
@@ -135,4 +143,5 @@ docker-compose up -d
                 }
             ]
         }
+
         ```
